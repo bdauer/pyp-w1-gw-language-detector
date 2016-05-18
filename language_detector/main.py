@@ -16,6 +16,11 @@ def create_set_common_words(languages):
     """
     create set of common words
     """
+    if not isinstance(languages, list):
+        raise ValueError("languages should be a valid language list of dictionaries")
+    for language in languages:
+        if 'common_words' not in language.keys():
+            raise ValueError("common_words missing from language: {}".format(language) )
     for language in languages:
         language['set_common_words'] = set(language['common_words'])
 
