@@ -6,6 +6,10 @@ def create_set_from_text(text):
     """
     return a set of the text
     """
+    if not isinstance(text, str):
+        raise ValueError("text needs to be a string")
+    if len(text) < 1:
+        raise ValueError("text cannot be null")
     return set(text.split())
 
 def create_set_common_words(languages):
@@ -45,7 +49,6 @@ def compute_language(languages, score):
       
 def detect_language(text, languages):
     """Returns the detected language of given text."""
-    # implement your solution here
     set_text = create_set_from_text(text)
     create_set_common_words(languages)
     language = generate_score(languages, set_text)
