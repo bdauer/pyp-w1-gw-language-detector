@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from language_detector import detect_language
-from language_detector import create_set_from_text
-
+from language_detector import *
 
 class TestLanguageDetector(unittest.TestCase):
 
@@ -89,4 +87,19 @@ class TestLanguageDetector(unittest.TestCase):
     def test_create_set_from_text_non_string(self):
         self.assertRaises(ValueError, create_set_from_text, False)
         self.assertRaises(ValueError, create_set_from_text, 2)
+    
+    def test_create_set_common_words(self):
+        test_languages = self.languages[:]
+        for language in test_languages:
+            language['set_common_words'] = set(language['common_words'])
+        create_set_common_words(self.languages)
+        self.assertEqual(self.languages, test_languages)
 
+    def test_create_set_common_words_invalid_input(self):
+        self.assertRaises(ValueError, create_set_common_words, "Hey There")
+
+    def test_create_set_common_words_invalid_dictionary(self):
+        test_dictionary = {
+                'foo': 'bar', 
+                'rmotr' : 'rocks'}
+        self.assertRaises(ValueError, create_set_common_words, test_dictionary )
