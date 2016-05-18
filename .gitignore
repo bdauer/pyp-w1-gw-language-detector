@@ -90,3 +90,6 @@ ENV/
 
 # c9 saved files
 ~.c9*
+
+# vim swp files
+*swp

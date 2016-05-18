@@ -1,1 +1,1 @@
-from .main import detect_language
+from .main import *

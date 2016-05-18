@@ -2,6 +2,7 @@
 import unittest
 
 from language_detector import detect_language
+from language_detector import create_set_from_text
 
 
 class TestLanguageDetector(unittest.TestCase):
@@ -77,3 +78,15 @@ class TestLanguageDetector(unittest.TestCase):
         """
         result = detect_language(text, self.languages)
         self.assertEqual(result, 'Spanish')
+    
+    def test_create_set_from_text(self):
+        text = "I am a very very good boy"
+        self.assertEqual(create_set_from_text(text), set(['I', 'am', 'a', 'very', 'good', 'boy']))
+
+    def test_create_set_from_text_null_string(self):
+        self.assertRaises(ValueError, create_set_from_text, "")
+
+    def test_create_set_from_text_non_string(self):
+        self.assertRaises(ValueError, create_set_from_text, False)
+        self.assertRaises(ValueError, create_set_from_text, 2)
+
