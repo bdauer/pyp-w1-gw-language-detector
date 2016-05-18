@@ -122,21 +122,6 @@ class TestLanguageDetector(unittest.TestCase):
         generate_score_for_common_words(test_languages, text)
         self.assertEqual(test_languages, test_languages_output)
 
-    def test_get_highest_score(self):
-        test_languages = [
-                {
-                    'name': 'English', 
-                    'common_words': ['I', 'am', 'a', 'hero'],
-                    'set_common_words': set(['I', 'am', 'a', 'hero']),
-                    'score': 3}, 
-                {
-                    'name': 'French', 
-                    'common_words': ['gre', 'more', 'blah'], 
-                    'set_common_words': set(['gre', 'more', 'blah']),
-                    'score': 0
-                    }]
-        self.assertEqual(get_highest_score(test_languages), 3)
-
     def test_compute_language_with_highest_score(self):
         test_languages = [
                 {
@@ -151,4 +136,3 @@ class TestLanguageDetector(unittest.TestCase):
                     'score': 0
                     }]
         self.assertEqual(compute_language_with_highest_score(test_languages), 'English')
-
