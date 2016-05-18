@@ -32,16 +32,6 @@ def generate_score_for_common_words(languages, set_text):
     for language in languages:
         language['score'] = len(set_text.intersection(language['set_common_words']))
 
-def compute_language_with_highest_score(languages):
-    """
-    Get the language name with the highest 
-    score
-    """
-    score = get_highest_score(languages)
-    for language in languages:
-        if language['score'] == score:
-            return language['name']
-            
 def get_highest_score(languages):
     """
     Get the highest score from the languages
@@ -51,6 +41,16 @@ def get_highest_score(languages):
         if language['score'] > sum:
             sum = language['score']
             return sum     
+
+def compute_language_with_highest_score(languages):
+    """
+    Get the language name with the highest 
+    score
+    """
+    score = get_highest_score(languages)
+    for language in languages:
+        if language['score'] == score:
+            return language['name']
   
 def detect_language(text, languages):
     """Returns the detected language of given text."""

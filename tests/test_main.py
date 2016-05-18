@@ -103,3 +103,52 @@ class TestLanguageDetector(unittest.TestCase):
                 'foo': 'bar', 
                 'rmotr' : 'rocks'}
         self.assertRaises(ValueError, create_set_common_words, test_dictionary )
+
+    def test_generate_score_for_common_words(self):
+        test_languages = [
+                {
+                    'name': 'English', 
+                    'common_words': ['I', 'am', 'a', 'hero'],
+                    'set_common_words': set(['I', 'am', 'a', 'hero'])}, 
+                {
+                    'name': 'French', 
+                    'common_words': ['gre', 'more', 'blah'], 
+                    'set_common_words': set(['gre', 'more', 'blah'])
+                    }]
+        test_languages_output = test_languages[:]
+        text = set("I am a superhero going after world domination".split())
+        test_languages_output[0]['score'] = 3
+        test_languages_output[1]['score'] = 0
+        generate_score_for_common_words(test_languages, text)
+        self.assertEqual(test_languages, test_languages_output)
+
+    def test_get_highest_score(self):
+        test_languages = [
+                {
+                    'name': 'English', 
+                    'common_words': ['I', 'am', 'a', 'hero'],
+                    'set_common_words': set(['I', 'am', 'a', 'hero']),
+                    'score': 3}, 
+                {
+                    'name': 'French', 
+                    'common_words': ['gre', 'more', 'blah'], 
+                    'set_common_words': set(['gre', 'more', 'blah']),
+                    'score': 0
+                    }]
+        self.assertEqual(get_highest_score(test_languages), 3)
+
+    def test_compute_language_with_highest_score(self):
+        test_languages = [
+                {
+                    'name': 'English', 
+                    'common_words': ['I', 'am', 'a', 'hero'],
+                    'set_common_words': set(['I', 'am', 'a', 'hero']),
+                    'score': 3}, 
+                {
+                    'name': 'French', 
+                    'common_words': ['gre', 'more', 'blah'], 
+                    'set_common_words': set(['gre', 'more', 'blah']),
+                    'score': 0
+                    }]
+        self.assertEqual(compute_language_with_highest_score(test_languages), 'English')
+
